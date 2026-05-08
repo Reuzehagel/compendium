@@ -1,0 +1,6 @@
+name = "compendium"
+compatibility_date = "2026-05-08"
+
+[assets]
+directory = "./out"
+not_found_handling = "404-page"
