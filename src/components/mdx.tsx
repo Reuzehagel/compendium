@@ -1,11 +1,12 @@
 import defaultMdxComponents from 'fumadocs-ui/mdx';
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
 import type { MDXComponents } from 'mdx/types';
-import { ZoomableImage } from './zoomable-image';
 
 export function getMDXComponents(components?: MDXComponents) {
   return {
     ...defaultMdxComponents,
-    img: ZoomableImage,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    img: (props) => <ImageZoom {...(props as any)} />,
     ...components,
   } satisfies MDXComponents;
 }
