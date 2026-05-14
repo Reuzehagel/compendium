@@ -5,7 +5,7 @@ import { ZoomableImage } from './zoomable-image';
 export function getMDXComponents(components?: MDXComponents) {
   return {
     ...defaultMdxComponents,
-    img: ZoomableImage,
+    img: ZoomableImage as NonNullable<MDXComponents['img']>,
     ...components,
   } satisfies MDXComponents;
 }

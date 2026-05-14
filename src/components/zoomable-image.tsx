@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import type { ImgHTMLAttributes } from 'react';
+import { Image, type ImageProps } from 'fumadocs-core/framework';
 
-export function ZoomableImage(props: ImgHTMLAttributes<HTMLImageElement>) {
+export function ZoomableImage(props: ImageProps) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -21,13 +21,13 @@ export function ZoomableImage(props: ImgHTMLAttributes<HTMLImageElement>) {
   }, [open]);
 
   const { className, style, alt, ...rest } = props;
+  const altText = typeof alt === 'string' ? alt : '';
 
   return (
     <>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <Image
         {...rest}
-        alt={alt ?? ''}
+        alt={altText}
         onClick={() => setOpen(true)}
         className={className}
         style={{ cursor: 'zoom-in', ...style }}
@@ -37,7 +37,7 @@ export function ZoomableImage(props: ImgHTMLAttributes<HTMLImageElement>) {
           onClick={() => setOpen(false)}
           role="dialog"
           aria-modal="true"
-          aria-label={alt || 'Expanded image'}
+          aria-label={altText || 'Expanded image'}
           style={{
             position: 'fixed',
             inset: 0,
@@ -50,11 +50,12 @@ export function ZoomableImage(props: ImgHTMLAttributes<HTMLImageElement>) {
             padding: '2rem',
           }}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             {...rest}
-            alt={alt ?? ''}
+            alt={altText}
             style={{
+              width: 'auto',
+              height: 'auto',
               maxWidth: '100%',
               maxHeight: '100%',
               objectFit: 'contain',
